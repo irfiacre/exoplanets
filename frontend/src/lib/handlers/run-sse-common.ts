@@ -99,6 +99,7 @@ export async function parseStreamRequest(request: NextRequest): Promise<{
       message?: string;
       userId?: string;
       sessionId?: string;
+      appName?: string;
     };
 
     // Validate the request structure
@@ -112,6 +113,7 @@ export async function parseStreamRequest(request: NextRequest): Promise<{
         message: requestBody.message!,
         userId: requestBody.userId!,
         sessionId: requestBody.sessionId!,
+        appName: requestBody.appName!,
       },
       validation: { isValid: true },
     };
@@ -137,6 +139,8 @@ export function validateStreamRequest(requestBody: {
   message?: string;
   userId?: string;
   sessionId?: string;
+  appName?: string;
+  
 }): StreamValidationResult {
   if (!requestBody.message?.trim()) {
     return {

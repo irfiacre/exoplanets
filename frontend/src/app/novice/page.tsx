@@ -27,9 +27,8 @@ export default function NovicePage() {
     let result;
     (async () => {
       handleUserIdChange(ANONYMOUS_USER);
-      await handleCreateNewSession(ANONYMOUS_USER);
+      await handleCreateNewSession(ANONYMOUS_USER, `/apps/beginner_agent/users/${ANONYMOUS_USER}/sessions`);
     })();
-    console.log("===", result);
   }, []);
 
   const interestOptions = [
@@ -88,12 +87,10 @@ export default function NovicePage() {
         `Hi, I am a user who is in the age range ${ageRange} with these interests: ${interests.join(
           ","
         )}`,
-        "CurriculumnAgentSystem",
+        "beginner_agent",
         ANONYMOUS_USER,
         sessionId
       );
-
-      console.log("Agent output:", agentOutput);
     } catch (error) {
       console.log(error);
     }

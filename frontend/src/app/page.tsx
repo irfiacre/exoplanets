@@ -29,7 +29,7 @@ export default function Home() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-2xl md:text-3xl font-semibold text-accent mb-12"
         >
-          Agentic AI
+          Exogent AI
         </motion.h2>
 
         {/* Logo */}

@@ -29,8 +29,9 @@ export function EmptyState(): React.JSX.Element {
             <strong>You can try:</strong> 
               <br />
               <ul className="list-disc list-inside">
+                <li>Show me the distribution of orbital periods across confirmed vs false positives in the K2 dataset.</li>
                 <li>Are there any K2 planets located in the habitable zone?</li>
-                <li>How many confirmed vs candidate planets are listed in the K2 dataset?</li>
+                <li>Given the following parameters, classify whether this potential candidate is likely a confirmed exoplanet, planetary candidate, or false positive: orbital_period=12.4d, radius=1.2Re, transit_depth=0.0023, star_temp=5800K.</li>
                 <li>
                   {"I am looking for Earth-sized planets around Sun-like stars in the K2 dataset. Filter candidates with radius < 1.5 Earth radii, host star temperature between 5000–6000K, and orbital periods 200–400 days. Return the top five results with EPIC ID and disposition."}
                 </li>

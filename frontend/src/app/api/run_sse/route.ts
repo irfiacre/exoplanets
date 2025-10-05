@@ -39,6 +39,7 @@ export async function POST(request: NextRequest): Promise<Response> {
       : "local_backend";
 
     // Log the incoming request with deployment strategy
+    
     logStreamRequest(
       requestData.sessionId,
       requestData.userId,

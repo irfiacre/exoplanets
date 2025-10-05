@@ -97,7 +97,7 @@ export function useBeginnerAnswer(): UseBeginnerAnswerReturn {
       }
 
       setIsGettingAnswer(false);
-      console.error("Backend failed to start within 2 minutes");
+      console.error("Answer failed to be got within 2 minutes");
     };
 
     checkBackend();
@@ -114,15 +114,14 @@ export function useBeginnerAnswer(): UseBeginnerAnswerReturn {
       setIsGettingAnswer(true);
       setIsAnswerReady(false);
       setAnswer(undefined);
-console.log("====", sessionId);
-
+      
       const response = await fetch("/api/run_sse", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          app_name: appName,
+          appName: appName,
           userId: userId,
           sessionId: sessionId,
           message,
