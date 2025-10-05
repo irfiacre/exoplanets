@@ -2,6 +2,7 @@ import os
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
+from pptx.dml.color import RGBColor
 from tools.utils import SLIDES_NAME, upload_ppt_to_gcs
 
 CURRENT_DIR = os.getcwd()
@@ -52,7 +53,8 @@ class PPTTool:
 
         p = text_frame.paragraphs[0]
         p.alignment = PP_ALIGN.CENTER
-        p.runs[0].font.size = Pt(24)
+        p.runs[0].font.size = Pt(32)
+        p.runs[0].font.bold = True
 
     def add_text_slide(self, title: str, content: list):
         """
@@ -66,19 +68,29 @@ class PPTTool:
             None
         """
         slide = self.prs.slides.add_slide(self.prs.slide_layouts[1])
+        # Title styling
         slide.shapes.title.text = title
-        body = slide.shapes.placeholders[1].text_frame
+        title_tf = slide.shapes.title.text_frame
+        title_paragraph = title_tf.paragraphs[0]
+        title_run = title_paragraph.runs[0]
+        title_run.font.bold = True
+        title_run.font.size = Pt(28)
+        title_run.font.color.rgb = RGBColor(0, 0, 0)  # Optional: black color
 
-        if isinstance(content, str):
-            body.text = content
-        elif isinstance(content, list):
-            body.text = content[0]
+        # Body content
+        body_tf = slide.shapes.placeholders[1].text_frame
+
+        if isinstance(content, list):
+            body_tf.text = content[0]
+            p = body_tf.paragraphs[0]
+            p.font.size = Pt(18)
             for item in content[1:]:
-                p = body.add_paragraph()
+                p = body_tf.add_paragraph()
                 p.text = item
                 p.level = 0
+                p.font.size = Pt(18)
         else:
-            raise ValueError("Content must be a string or list of strings")
+            raise ValueError("Content must be a list of strings")
 
     def save_slide(self) -> str:
         """
