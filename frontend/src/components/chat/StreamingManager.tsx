@@ -56,6 +56,7 @@ export function useStreamingManager({
         message: message.trim(),
         userId,
         sessionId,
+        appName: "reseach_agent"
       };
 
       try {

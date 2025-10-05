@@ -19,7 +19,8 @@ export interface SessionHistoryResult {
 
 export async function loadSessionHistoryAction(
   userId: string,
-  sessionId: string
+  sessionId: string,
+  appName?: string
 ): Promise<SessionHistoryResult> {
   try {
     console.log("🔄 [SESSION_HISTORY_ACTION] Loading session history:", {
@@ -28,7 +29,11 @@ export async function loadSessionHistoryAction(
     });
 
     // Fetch session with events from ADK backend (server-side)
-    const sessionWithEvents = await getSessionWithEvents(userId, sessionId);
+    const sessionWithEvents = await getSessionWithEvents(
+      userId,
+      sessionId,
+      appName
+    );
 
     if (!sessionWithEvents) {
       console.log("⚠️ [SESSION_HISTORY_ACTION] Session not found");

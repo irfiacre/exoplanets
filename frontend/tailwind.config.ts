@@ -14,6 +14,7 @@ const config: Config = {
         sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       colors: {
+        primary_accent: "#CB384A",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

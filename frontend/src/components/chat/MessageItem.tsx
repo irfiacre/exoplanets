@@ -39,7 +39,7 @@ export function MessageItem({
   if (message.type === "human") {
     return (
       <div className="flex items-start justify-end gap-3 max-w-[85%] ml-auto">
-        <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white p-4 rounded-2xl rounded-tr-sm shadow-lg border border-blue-500/20">
+        <div className="bg-slate-500 text-white p-4 rounded-2xl rounded-tr-sm">
           <ReactMarkdown
             components={{
               ...mdComponents,
@@ -95,7 +95,7 @@ export function MessageItem({
             {message.content}
           </ReactMarkdown>
         </div>
-        <div className="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center shadow-md border border-blue-500/30">
+        <div className="flex-shrink-0 w-8 h-8 bg-slate-500 rounded-full flex items-center justify-center border border-blue-500/30">
           <User className="h-4 w-4 text-white" />
         </div>
       </div>
@@ -113,11 +113,11 @@ export function MessageItem({
   if (isLoading && hasTimelineEvents) {
     return (
       <div className="flex items-start gap-3 max-w-[90%]">
-        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
+        <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center">
           <Bot className="h-4 w-4 text-white" />
         </div>
 
-        <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg">
+        <div className="flex-1 bg-black  border rounded-2xl rounded-tl-sm p-4">
           {/* Activity Timeline during thinking */}
           {hasTimelineEvents && (
             <ActivityTimeline
@@ -134,8 +134,8 @@ export function MessageItem({
           )}
 
           {/* Loading indicator */}
-          <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2">
-            <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
+          <div className="flex items-center gap-2 bg-black rounded-lg px-3 py-2">
+            <Loader2 className="h-4 w-4 animate-spin text-white" />
             <span className="text-sm text-slate-400">
               {message.content
                 ? "🚀 Still processing..."
@@ -153,18 +153,18 @@ export function MessageItem({
     if (hasTimelineEvents) {
       return (
         <div className="flex items-start gap-3 max-w-[90%]">
-          <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
+          <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center">
             <Bot className="h-4 w-4 text-white" />
           </div>
 
-          <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg">
+          <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl rounded-tl-sm p-4">
             <ActivityTimeline
               processedEvents={messageEvents.get(message.id) || []}
               isLoading={isLoading}
             />
 
             {/* Show thinking indicator */}
-            <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2 mt-2">
+            <div className="flex items-center gap-2 bg-black rounded-lg px-3 py-2 mt-2">
               <span className="text-sm text-slate-400">🤔 Thinking...</span>
             </div>
           </div>
@@ -175,10 +175,10 @@ export function MessageItem({
     // Otherwise show no content indicator
     return (
       <div className="flex items-start gap-3 max-w-[90%]">
-        <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
+        <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center">
           <Bot className="h-4 w-4 text-white" />
         </div>
-        <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2">
+        <div className="flex items-center gap-2 bg-black rounded-lg px-3 py-2">
           <span className="text-sm text-slate-400">No content</span>
         </div>
       </div>
@@ -188,11 +188,11 @@ export function MessageItem({
   // Regular AI message display with content
   return (
     <div className="flex items-start gap-3 max-w-[90%]">
-      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
+      <div className="flex-shrink-0 w-8 h-8 bg-black rounded-full flex items-center justify-center">
         <Bot className="h-4 w-4 text-white" />
       </div>
 
-      <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg relative group">
+      <div className="flex-1 bg-black/90 rounded-2xl rounded-tl-sm p-4 relative group">
         {/* Activity Timeline */}
         {messageEvents && messageEvents.has(message.id) && (
           <ActivityTimeline
@@ -214,16 +214,16 @@ export function MessageItem({
             title="Copy message"
           >
             {copiedMessageId === message.id ? (
-              <CopyCheck className="h-4 w-4 text-emerald-400" />
+              <CopyCheck className="h-4 w-4 text-slate-400" />
             ) : (
-              <Copy className="h-4 w-4 text-slate-400 hover:text-slate-300" />
+              <Copy className="h-4 w-4 text-slate-200" />
             )}
           </button>
         )}
 
         {/* Timestamp */}
-        <div className="mt-3 pt-2 border-t border-slate-700/50">
-          <span className="text-xs text-slate-400">
+        <div className="mt-3 pt-2 b">
+          <span className="text-xs">
             {message.timestamp.toLocaleTimeString()}
           </span>
         </div>

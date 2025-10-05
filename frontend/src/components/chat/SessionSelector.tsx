@@ -30,7 +30,7 @@ interface SessionSelectorProps {
   currentUserId: string;
   currentSessionId: string;
   onSessionSelect: (sessionId: string) => void;
-  onCreateSession: (userId: string) => Promise<void>;
+  onCreateSession: (userId: string, url?: string) => Promise<void>;
   className?: string;
 }
 
@@ -58,7 +58,7 @@ export function SessionSelector({
           userId
         );
 
-        const result = await fetchActiveSessionsAction(userId);
+        const result = await fetchActiveSessionsAction(userId, "research_agent");
 
         if (result.success) {
           console.log("✅ [SESSION_SELECTOR] Active sessions fetched:", {
@@ -180,7 +180,7 @@ export function SessionSelector({
       // Create new session
       setIsCreatingSession(true);
       try {
-        await onCreateSession(currentUserId);
+        await onCreateSession(currentUserId, `/apps/research_agent/users/${currentUserId}/sessions`);
 
         // Refresh session list after creation to ensure it appears
         console.log("🔄 [SESSION_SELECTOR] Refreshing sessions after creation");
@@ -223,17 +223,17 @@ export function SessionSelector({
   };
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className} text-black`}>
       {!currentUserId ? (
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+        <div className="flex items-center gap-2 text-xs">
           <MessageSquare className="w-4 h-4" />
           <span>No user set</span>
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">Session:</span>
+          <span>Session:</span>
           <Select value={currentSessionId} onValueChange={handleSessionSelect}>
-            <SelectTrigger className="w-44 h-12 text-xs bg-slate-700/50 border-slate-600/50 text-slate-100 hover:bg-slate-600/50 focus:border-emerald-500 px-4 py-1">
+            <SelectTrigger className="w-44 h-12 text-xs border-black focus:border-slate-700 px-4 py-1">
               <SelectValue
                 placeholder={
                   isLoadingSessions
@@ -246,10 +246,10 @@ export function SessionSelector({
                 }
               />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-600 min-w-44">
+            <SelectContent className="border-black min-w-44">
               {/* Loading state */}
               {isLoadingSessions && (
-                <div className="flex items-center gap-2 p-3 text-slate-400">
+                <div className="flex items-center gap-2 p-3">
                   <Loader2 className="w-4 h-4 animate-spin" />
                   <span className="text-sm">Loading active sessions...</span>
                 </div>
@@ -270,13 +270,13 @@ export function SessionSelector({
                     <SelectItem
                       key={session.id}
                       value={session.id}
-                      className="text-slate-100 focus:bg-slate-700 focus:text-slate-50 cursor-pointer py-3 px-3"
+                      className="focus:bg-slate-700 focus:text-slate-50 cursor-pointer py-3 px-3"
                     >
                       <div className="flex flex-col items-start w-full min-w-0">
-                        <span className="font-medium text-slate-100 text-sm truncate w-full">
+                        <span className="font-medium text-sm truncate w-full">
                           {session.title}
                         </span>
-                        <div className="flex items-center gap-2 text-xs text-slate-300 mt-1">
+                        <div className="flex items-center gap-2 text-xs mt-1">
                           <Calendar className="w-3 h-3 flex-shrink-0" />
                           <span className="flex-shrink-0">
                             {formatDate(session.lastActivity)}
@@ -293,19 +293,18 @@ export function SessionSelector({
                       </div>
                     </SelectItem>
                   ))}
-                  {/* Create New Session Option */}
                   <SelectItem
                     value="create-new"
-                    className="text-slate-100 focus:bg-slate-700 focus:text-slate-50 border-t border-slate-600 mt-1 cursor-pointer py-3 px-3"
+                    className="focus:bg-white focus:text-slate-50 border-t border-slate-600 mt-1 cursor-pointer py-3 px-3"
                     disabled={isCreatingSession}
                   >
                     <div className="flex items-center gap-2">
                       {isCreatingSession ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-emerald-400 flex-shrink-0" />
+                        <Loader2 className="w-4 h-4 animate-spin text-black flex-shrink-0" />
                       ) : (
-                        <Plus className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                        <Plus className="w-4 h-4 text-black flex-shrink-0" />
                       )}
-                      <span className="text-emerald-400 font-medium">
+                      <span className="text-black font-medium">
                         {isCreatingSession
                           ? "Creating..."
                           : "Create New Session"}

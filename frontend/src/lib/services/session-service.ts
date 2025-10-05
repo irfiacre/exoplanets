@@ -3,12 +3,13 @@ import {
   getAuthHeaders,
   shouldUseAgentEngine,
 } from "@/lib/config";
+import { url } from "inspector";
 
 /**
  * Gets the ADK app name from environment or defaults
  */
 function getAdkAppName(): string {
-  return process.env.ADK_APP_NAME || "research_agent";
+  return process.env.ADK_APP_NAME || "reseach_agent";
 }
 
 /**
@@ -26,7 +27,7 @@ export interface SessionCreationResult {
  * Abstract base class for session management services
  */
 export abstract class SessionService {
-  abstract createSession(userId: string): Promise<SessionCreationResult>;
+  abstract createSession(userId: string, url?: string): Promise<SessionCreationResult>;
 }
 
 /**
@@ -98,10 +99,10 @@ export class AgentEngineSessionService extends SessionService {
  * Handles session creation using local backend API
  */
 export class LocalBackendSessionService extends SessionService {
-  async createSession(userId: string): Promise<SessionCreationResult> {
+  async createSession(userId: string, url?: string): Promise<SessionCreationResult> {
     const appName = getAdkAppName();
     const sessionEndpoint = getEndpointForPath(
-      `/apps/${appName}/users/${userId}/sessions`
+      url ? url: `/apps/${appName}/users/${userId}/sessions`
     );
 
     try {
@@ -178,8 +179,9 @@ export function getSessionService(): SessionService {
  * This function determines the deployment strategy and delegates to the correct service
  */
 export async function createSessionWithService(
-  userId: string
+  userId: string,
+  url?: string
 ): Promise<SessionCreationResult> {
   const service = getSessionService();
-  return await service.createSession(userId);
+  return await service.createSession(userId, url);
 }

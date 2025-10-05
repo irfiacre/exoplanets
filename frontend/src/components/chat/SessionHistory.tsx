@@ -29,7 +29,7 @@ export function SessionHistory({
   if (isLoadingHistory) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="flex items-center gap-3 text-slate-400">
+        <div className="flex items-center gap-3 text-slate-500">
           <Loader2 className="h-5 w-5 animate-spin" />
           <div className="flex flex-col">
             <span className="text-sm font-medium">
@@ -83,7 +83,7 @@ export function SessionHistoryPlaceholder({
   }
 
   return (
-    <div className="flex items-center justify-center py-8 text-slate-500">
+    <div className="flex items-center justify-center py-8 text-slate-700">
       <div className="flex items-center gap-3">
         <MessageCircle className="h-5 w-5" />
         <div className="flex flex-col">

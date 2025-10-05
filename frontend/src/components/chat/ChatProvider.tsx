@@ -36,7 +36,7 @@ export interface ChatContextValue {
   // Session actions
   handleUserIdChange: (newUserId: string) => void;
   handleUserIdConfirm: (confirmedUserId: string) => void;
-  handleCreateNewSession: (sessionUserId: string) => Promise<void>;
+  handleCreateNewSession: (sessionUserId: string, url?:string) => Promise<void>;
   handleSessionSwitch: (newSessionId: string) => void;
 
   // Message actions
@@ -233,7 +233,7 @@ export function ChatProvider({
           updateWebsiteCount(0);
 
           // Load session history using Server Action (keeps Google Auth on server)
-          const result = await loadSessionHistoryAction(userId, sessionId);
+          const result = await loadSessionHistoryAction(userId, sessionId, "research_agent");
 
           if (result.success) {
             console.log(

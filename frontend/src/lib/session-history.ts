@@ -38,9 +38,10 @@ export class AdkSessionService {
    */
   static async getSession(
     userId: string,
-    sessionId: string
+    sessionId: string,
+    app_name?: string 
   ): Promise<AdkSession | null> {
-    const appName = getAdkAppName();
+    const appName = app_name? app_name: getAdkAppName();
 
     if (shouldUseAgentEngine()) {
       // Agent Engine: Use v1beta1 sessions API
@@ -108,8 +109,11 @@ export class AdkSessionService {
   /**
    * Lists all sessions for a user
    */
-  static async listSessions(userId: string): Promise<ListSessionsResponse> {
-    const appName = getAdkAppName();
+  static async listSessions(
+    userId: string,
+    app_name?: string
+  ): Promise<ListSessionsResponse> {
+    const appName = app_name ? app_name : getAdkAppName();
 
     if (shouldUseAgentEngine()) {
       // Agent Engine: Use v1beta1 sessions API
@@ -154,7 +158,7 @@ export class AdkSessionService {
 
             return {
               id: sessionId,
-              app_name: getAdkAppName(), // Add app_name for compatibility
+              app_name: appName, // Add app_name for compatibility
               user_id: session.userId,
               state: null,
               last_update_time: session.updateTime || session.createTime,
@@ -237,9 +241,10 @@ export class AdkSessionService {
    */
   static async listEvents(
     userId: string,
-    sessionId: string
+    sessionId: string,
+    app_name?: string
   ): Promise<ListEventsResponse> {
-    const appName = getAdkAppName();
+    const appName = app_name? app_name: getAdkAppName();
 
     if (shouldUseAgentEngine()) {
       // Agent Engine: Use v1beta1 sessions API
@@ -315,14 +320,16 @@ export class AdkSessionService {
    */
   static async getSessionWithEvents(
     userId: string,
-    sessionId: string
+    sessionId: string,
+    appName?: string
   ): Promise<AdkSessionWithEvents | null> {
     try {
       if (shouldUseAgentEngine()) {
         // For Agent Engine, get events directly from the /events endpoint
         const eventsResponse = await AdkSessionService.listEvents(
           userId,
-          sessionId
+          sessionId,
+          appName
         );
         const events = eventsResponse?.events || [];
 
@@ -330,7 +337,7 @@ export class AdkSessionService {
         const session: AdkSessionWithEvents = {
           id: sessionId,
           user_id: userId,
-          app_name: process.env.ADK_APP_NAME || "app",
+          app_name: appName ? appName:process.env.ADK_APP_NAME || "research_agent",
           state: null,
           last_update_time: new Date().toISOString(),
           events: events,
@@ -368,13 +375,15 @@ export class AdkSessionService {
  */
 export async function getSessionWithEvents(
   userId: string,
-  sessionId: string
+  sessionId: string,
+  appName?: string
 ): Promise<AdkSessionWithEvents | null> {
-  return await AdkSessionService.getSessionWithEvents(userId, sessionId);
+  return await AdkSessionService.getSessionWithEvents(userId, sessionId, appName);
 }
 
 export async function listUserSessions(
-  userId: string
+  userId: string,
+  appName?: string
 ): Promise<ListSessionsResponse> {
-  return await AdkSessionService.listSessions(userId);
+  return await AdkSessionService.listSessions(userId, appName);
 }

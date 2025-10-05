@@ -10,12 +10,13 @@ import {
  * Backend will generate and return the session ID
  */
 export async function createSessionAction(
-  userId: string
+  userId: string,
+  url?: string
 ): Promise<SessionCreationResult> {
   try {
     console.log(`📡 Server Action - Creating session for userId: ${userId}`);
 
-    const result = await createSessionWithService(userId);
+    const result = await createSessionWithService(userId, url);
 
     console.log(`✅ Server Action - Session creation result:`, result);
 

@@ -13,55 +13,28 @@ export function EmptyState(): React.JSX.Element {
       <div className="max-w-4xl w-full space-y-8">
         {/* Main header */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-white">Reasearcher Agent</h1>
+          <h1 className="text-4xl font-bold">Exoplanets Researcher</h1>
         </div>
 
         {/* Description */}
         <div className="space-y-4">
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-            An enterprize level AI agent that based on requirements executes
-            automation scripts.
+          <p className="capitalize text-lg max-w-2xl mx-auto">
+            An Exoplanets <strong className="uppercase">AI</strong> assistant to facilitate you to in your research.
           </p>
-        </div>
-
-        {/* Feature highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          <div className="space-y-3">
-            <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto">
-              <Icon icon="icon-park-solid:web-page" fontSize={28} />
-            </div>
-            <h3 className="font-semibold text-green-400">Web Browsers</h3>
-          </div>
-          <div className="space-y-3">
-            <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mx-auto">
-              <Icon icon="ic:baseline-apple" fontSize={28} />
-            </div>
-            <h3 className="font-semibold text-blue-400">
-              iOS <span className="text-sm text-neutral-400">(Coming soon)</span>
-              
-            </h3>
-          </div>
-          <div className="space-y-3">
-            <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mx-auto">
-              <Icon icon="material-symbols:android" fontSize={28} />
-            </div>
-            <h3 className="font-semibold text-purple-400">Android <span className="text-sm text-neutral-400">(Coming soon)</span></h3>
-          </div>
         </div>
 
         {/* Try asking about section */}
         <div className="space-y-4 text-start">
-          <p className="text-neutral-400">Examples:</p>
           <div className=" ">
-            <p>
-            <strong>URI:</strong> www.google.com, 
+            <strong>You can try:</strong> 
               <br />
-             <strong>Requirements:</strong>
-              <ul>
-                <li>- The user should be able to search and click on the first result.</li>
-                <li>- The user should be able to search, click on the first result, and go back to the search page.</li>
-              </ul>
-            </p>
+              <ul className="list-disc list-inside">
+                <li>Are there any K2 planets located in the habitable zone?</li>
+                <li>How many confirmed vs candidate planets are listed in the K2 dataset?</li>
+                <li>
+                  {"I am looking for Earth-sized planets around Sun-like stars in the K2 dataset. Filter candidates with radius < 1.5 Earth radii, host star temperature between 5000–6000K, and orbital periods 200–400 days. Return the top five results with EPIC ID and disposition."}
+                </li>
+           </ul>
           </div>
         </div>
       </div>

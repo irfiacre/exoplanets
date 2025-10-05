@@ -11,7 +11,7 @@ import { NextRequest } from "next/server";
  * Gets the ADK app name from environment or defaults
  */
 function getAdkAppName(): string {
-  return process.env.ADK_APP_NAME || "app";
+  return process.env.ADK_APP_NAME || "reseach_agent";
 }
 
 /**
@@ -21,6 +21,7 @@ export interface ProcessedStreamRequest {
   message: string;
   userId: string;
   sessionId: string;
+  appName?: string;
 }
 
 /**
@@ -190,7 +191,7 @@ export function formatLocalBackendPayload(
   requestData: ProcessedStreamRequest
 ): LocalBackendPayload {
   return {
-    appName: getAdkAppName(),
+    appName: requestData.appName ? requestData.appName: getAdkAppName(),
     userId: requestData.userId,
     sessionId: requestData.sessionId,
     newMessage: {

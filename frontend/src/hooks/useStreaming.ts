@@ -77,6 +77,7 @@ export function useStreaming(
         message: apiPayload.message,
         userId: apiPayload.userId,
         sessionId: apiPayload.sessionId,
+        appName: "research_agent"
       };
 
       // Delegate to connection manager

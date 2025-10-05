@@ -54,8 +54,8 @@ export function InputForm({
           relative flex items-end gap-3 p-3 rounded-2xl border transition-all duration-200
           ${
             isFocused
-              ? "border-emerald-400/50 bg-slate-800/80 shadow-lg shadow-emerald-500/10"
-              : "border-slate-700/50 bg-slate-800/50 hover:border-slate-600/50"
+              ? "border-slate-400 bg-white/80"
+              : "border-slate-700/50 bg-white/50 hover:border-slate-600/50"
           }
           backdrop-blur-sm
         `}
@@ -72,11 +72,7 @@ export function InputForm({
               placeholder={placeholderText}
               rows={1}
               className="
-                resize-none border-0 bg-transparent text-slate-200 placeholder-slate-400
-                focus:ring-0 focus:outline-none focus:border-0 focus:shadow-none
-                min-h-[80px] max-h-48
-                scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600
-                px-0 py-3
+                resize-none border-0 bg-transparent text-black placeholder-slate-500 focus:ring-0 focus:outline-none focus:border-0 min-h-[80px] max-h-48 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600 px-0 py-3
               "
               style={{
                 fontSize: "16px",
@@ -101,17 +97,13 @@ export function InputForm({
             size="sm"
             disabled={!inputValue.trim() || isLoading}
             className="
-              h-9 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700
-              text-white border-0 shadow-lg transition-all duration-200
-              disabled:opacity-50 disabled:cursor-not-allowed
-              disabled:bg-slate-600 disabled:from-slate-600 disabled:to-slate-600
-              flex items-center gap-2
+              h-9 px-4 bg-black/80 hover:bg-black text-white border-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-600 disabled:from-slate-600 disabled:to-slate-600 flex items-center gap-2
             "
           >
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="hidden sm:inline">Processing...</span>
+                <span className="hidden sm:inline">Thinking...</span>
               </>
             ) : (
               <>

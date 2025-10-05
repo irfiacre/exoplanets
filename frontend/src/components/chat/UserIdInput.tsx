@@ -125,10 +125,10 @@ export function UserIdInput({
   }, [isEditing]);
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className} text-black`}>
       {isEditing ? (
-        <div className="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-2 flex items-center gap-2">
-          <User className="w-4 h-4 text-slate-300 flex-shrink-0" />
+        <div className="bg-white backdrop-blur-sm border border-black/50 rounded-lg p-2 flex items-center gap-2">
+          <User className="w-4 h-4 flex-shrink-0" />
           <Input
             data-testid="user-id-input"
             value={inputValue}
@@ -138,7 +138,7 @@ export function UserIdInput({
             onKeyDown={handleKeyPress}
             onBlur={handleInputBlur}
             placeholder="Enter user ID"
-            className={`w-32 text-xs bg-slate-800 text-slate-100 border-slate-600 focus:border-emerald-500 focus:ring-emerald-500/20 ${
+            className={`w-32 text-sm bg-white text-black border-black focus:border-primary_accent focus:ring-primary_accent/20 ${
               !isValid ? "border-red-500" : ""
             }`}
             disabled={isLoading}
@@ -151,7 +151,7 @@ export function UserIdInput({
               isLoading ||
               (shouldShowValidation && !isValid)
             }
-            className="h-7 px-2 bg-emerald-600 hover:bg-emerald-700 text-white"
+            className="h-7 px-2 bg-primary_accent/90 hover:bg-primary_accent text-white"
           >
             {isLoading ? (
               <div className="w-3 h-3 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -164,12 +164,12 @@ export function UserIdInput({
             variant="outline"
             onClick={handleCancel}
             disabled={isLoading}
-            className="h-7 px-2 border-slate-600 text-slate-300 hover:bg-slate-600 hover:text-slate-100"
+            className="h-7 px-2 border-black hover:bg-black"
           >
             <X className="w-3 h-3" />
           </Button>
           {shouldShowValidation && !isValid && validationMessage && (
-            <div className="flex items-center gap-1 text-xs text-red-400">
+            <div className="flex items-center gap-1 text-sm text-red-400">
               <AlertCircle className="w-3 h-3" />
               <span className="whitespace-nowrap">{validationMessage}</span>
             </div>
@@ -177,10 +177,10 @@ export function UserIdInput({
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">User:</span>
+          <span className="text-sm">User:</span>
           <Badge
             variant="secondary"
-            className="font-mono bg-slate-700/50 text-slate-200 border-slate-600/50 hover:bg-slate-600/50"
+            className="bg-black text-base"
           >
             {currentUserId}
           </Badge>
@@ -189,7 +189,7 @@ export function UserIdInput({
             variant="ghost"
             onClick={handleEdit}
             disabled={isLoading}
-            className="text-xs h-6 px-2 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"
+            className="text-sm h-6 px-2 hover:bg-black/50"
           >
             Edit
           </Button>

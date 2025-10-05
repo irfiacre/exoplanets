@@ -11,7 +11,7 @@ export interface UseSessionReturn {
 
   // Session management
   handleSessionSwitch: (newSessionId: string) => void;
-  handleCreateNewSession: (sessionUserId: string) => Promise<void>;
+  handleCreateNewSession: (sessionUserId: string, url?: string) => Promise<void>;
 }
 
 /**
@@ -44,7 +44,7 @@ export function useSession(): UseSessionReturn {
 
   // Handle new session creation
   const handleCreateNewSession = useCallback(
-    async (sessionUserId: string): Promise<void> => {
+    async (sessionUserId: string, url?: string): Promise<void> => {
       if (!sessionUserId) {
         throw new Error("User ID is required to create a session");
       }
@@ -57,7 +57,7 @@ export function useSession(): UseSessionReturn {
           "@/lib/actions/session-actions"
         );
 
-        const sessionResult = await createSessionAction(sessionUserId);
+        const sessionResult = await createSessionAction(sessionUserId, url);
 
         if (sessionResult.success) {
           // Use the session ID returned by the backend
